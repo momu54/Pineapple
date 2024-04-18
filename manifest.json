@@ -1,0 +1,20 @@
+{
+	"manifest_version": 3,
+	"name": "Pineapple",
+	"description": "To decide what to eat",
+	"version": "0.0.2",
+	"icons": {
+		"64": "icons/icon.png"
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://*.youtube.com/*"],
+			"js": ["dist/youtube.js"]
+		}
+	],
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "{eaf959eb-73e4-40ff-bdad-24ae0a24267e}"
+		}
+	}
+}
