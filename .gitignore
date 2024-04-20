@@ -3,3 +3,4 @@ dist
 .vscode
 icons
 web-ext-artifacts
+.env
