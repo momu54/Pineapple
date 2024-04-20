@@ -1,13 +1,9 @@
-let pendingRecords: MutationRecord[] = [];
-const observer = new MutationObserver((records) => {
-	pendingRecords.push(...records);
-});
-const app = document.getElementsByTagName('ytd-app')[0];
+let isOwnerChecked = false;
+let isGameDetected = false;
 
-observer.observe(app, {
-	childList: true,
-	subtree: true,
-});
+interface OwnerResponse {
+	blocked: boolean;
+}
 
 function onDetectedGame() {
 	stop();
@@ -22,23 +18,48 @@ function onDetectedGame() {
 	}
 }
 
-setInterval(() => {
-	if (pendingRecords.length === 0) return;
-
-	const isBlockedContent = pendingRecords.some((record) => {
-		if (record.target.nodeName !== 'A') return false;
-		const target = record.target as HTMLAnchorElement;
-
-		if (target.href.includes('UCn-Tkh9XsSaZdipNKo13ZWA')) {
-			return true;
-		}
-
-		return false;
+async function onOwnerLoaded(ownerID: string) {
+	const result = await fetch('https://{{api_host}}/api/owner', {
+		method: 'POST',
+		body: JSON.stringify({ owner: ownerID }),
+		headers: {
+			'Content-Type': 'application/json',
+		},
 	});
 
-	if (isBlockedContent) {
+	const jsonResult: OwnerResponse = await result.json();
+	if (jsonResult.blocked) {
 		onDetectedGame();
 	}
+}
 
-	pendingRecords = [];
-}, 100);
+function videosHandler() {
+	const interval = setInterval(() => {
+		const gameElement = document.querySelector(
+			'ytd-rich-metadata-renderer > [href^="/channel/"]'
+		);
+		if (gameElement) {
+			onDetectedGame();
+			clearInterval(interval);
+		}
+	}, 100);
+}
+
+function shortsHandler() {
+	const interval = setInterval(() => {
+		const ownerElement = document.querySelector(
+			'a[href^="/@"]'
+		) as HTMLAnchorElement | null;
+		if (ownerElement) {
+			const ownerID = ownerElement.href.split('@')[1];
+			onOwnerLoaded(ownerID);
+			clearInterval(interval);
+		}
+	}, 100);
+}
+
+if (location.pathname.startsWith('/watch')) {
+	videosHandler();
+} else if (location.pathname.startsWith('/shorts')) {
+	shortsHandler();
+}

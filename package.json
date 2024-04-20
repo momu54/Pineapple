@@ -7,6 +7,7 @@
 		"start:chrome": "web-ext run -t=chromium --chromium-binary=\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
 		"start:firefox": "web-ext run --firefox=deved",
 		"build": "tsc && tsx scripts/build.ts",
+		"build:dev": "tsc && tsx scripts/build.ts dev",
 		"build:xpi": "web-ext build --overwrite-dest"
 	},
 	"keywords": [],
@@ -20,6 +21,7 @@
 	"devDependencies": {
 		"@types/firefox-webext-browser": "^120.0.3",
 		"@types/node": "^20.12.7",
+		"dotenv": "^16.4.5",
 		"tsx": "^4.7.2"
 	},
 	"typeAcquisition": {

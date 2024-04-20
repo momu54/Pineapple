@@ -1,15 +1,18 @@
 {
+	"$schema": "https://json.schemastore.org/chrome-manifest",
 	"manifest_version": 3,
 	"name": "Pineapple",
 	"description": "To decide what to eat",
-	"version": "0.0.2",
+	"version": "0.0.3",
+	"host_permissions": ["*://localhost/*", "*://pineapple.seriaati.xyz:9443/*"],
 	"icons": {
 		"64": "icons/icon.png"
 	},
 	"content_scripts": [
 		{
 			"matches": ["*://*.youtube.com/*"],
-			"js": ["dist/youtube.js"]
+			"js": ["dist/youtube.js"],
+			"run_at": "document_end"
 		}
 	],
 	"browser_specific_settings": {
