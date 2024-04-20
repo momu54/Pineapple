@@ -1,6 +1,3 @@
-let isOwnerChecked = false;
-let isGameDetected = false;
-
 interface OwnerResponse {
 	blocked: boolean;
 }
@@ -34,32 +31,40 @@ async function onOwnerLoaded(ownerID: string) {
 }
 
 function videosHandler() {
-	const interval = setInterval(() => {
-		const gameElement = document.querySelector(
-			'ytd-rich-metadata-renderer > [href^="/channel/"]'
-		);
+	const interval = window.setInterval(() => {
+		const gameElement = document.querySelector('a[href="/gaming"]');
 		if (gameElement) {
 			onDetectedGame();
-			clearInterval(interval);
+			window.clearInterval(interval);
 		}
 	}, 100);
 }
 
+let shortsInterval: number;
 function shortsHandler() {
-	const interval = setInterval(() => {
+	shortsInterval = window.setInterval(() => {
 		const ownerElement = document.querySelector(
-			'a[href^="/@"]'
+			'ytd-shorts [is-active] a[href^="/@"]'
 		) as HTMLAnchorElement | null;
 		if (ownerElement) {
 			const ownerID = ownerElement.href.split('@')[1];
 			onOwnerLoaded(ownerID);
-			clearInterval(interval);
+			window.clearInterval(shortsInterval);
 		}
 	}, 100);
 }
 
-if (location.pathname.startsWith('/watch')) {
-	videosHandler();
-} else if (location.pathname.startsWith('/shorts')) {
-	shortsHandler();
+function onNavigate() {
+	if (location.pathname === '/watch') {
+		videosHandler();
+	} else if (location.pathname.startsWith('/shorts')) {
+		if (shortsInterval) {
+			window.clearInterval(shortsInterval);
+		}
+		shortsHandler();
+	}
 }
+
+document.addEventListener('yt-navigate-finish', onNavigate);
+document.addEventListener('spfdone', onNavigate);
+onNavigate();
