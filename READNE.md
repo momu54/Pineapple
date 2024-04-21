@@ -46,4 +46,4 @@ pnpm build
         - Chromium
             - Open youe favorite browser and go to `chrome://extensions/`
             - Enable `Developer mode`
-            - Click `Pack extension` and select root directory Pineapple
+            - Click `Pack extension` and select dist folder

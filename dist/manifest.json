@@ -3,7 +3,7 @@
 	"manifest_version": 3,
 	"name": "Pineapple",
 	"description": "To decide what to eat",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"host_permissions": ["*://localhost/*", "*://pineapple.seriaati.xyz:9443/*"],
 	"icons": {
 		"64": "icons/icon.png"
@@ -11,13 +11,14 @@
 	"content_scripts": [
 		{
 			"matches": ["*://*.youtube.com/*"],
-			"js": ["dist/youtube.js"],
+			"js": ["youtube.js"],
 			"run_at": "document_end"
 		}
 	],
 	"browser_specific_settings": {
 		"gecko": {
-			"id": "{eaf959eb-73e4-40ff-bdad-24ae0a24267e}"
+			"id": "{eaf959eb-73e4-40ff-bdad-24ae0a24267e}",
+			"update_url": "https://github.com/momu54/Pineapple/releases/latest/download/Pineapple.xpi"
 		}
 	}
 }
