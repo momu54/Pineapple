@@ -1,8 +1,10 @@
 node_modules
 .vscode
-icons
 web-ext-artifacts
 .env
 
 dist/*.js
 dist/*.map
+dist/icons
+
+dist.crx
