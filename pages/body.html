@@ -1,7 +1,14 @@
 <div id="main">
 	<div id="content">
 		<div id="title">哦，<b>這個影片</b> 被阻止了 😔</div>
-		<div id="message">您所要訪問的網站被網絡管理員阻止。</div>
+		<div id="message">
+			<p>
+				您所要訪問的網站被網絡管理員阻止。<br />如果這個影片不應該被阻擋，請嘗試
+			</p>
+			<button type="button" class="refresh" onclick="location.reload()">
+				重新載入
+			</button>
+		</div>
 		<div id="reason" style="visibility: visible">
 			<div class="divider"></div>
 			<div id="blockedBy">
