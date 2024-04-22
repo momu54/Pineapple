@@ -9,14 +9,14 @@ function onDetectedGame() {
 	}
 
 	if (true) {
-		document.head.innerHTML = `{{blockpage.head}}`;
-		document.body.innerHTML = `{{blockpage.body}}`;
+		document.head.innerHTML = Placeholder.BLOCKPAGE.HEAD;
+		document.body.innerHTML = Placeholder.BLOCKPAGE.BODY;
 		return;
 	}
 }
 
 async function onOwnerLoaded(ownerID: string) {
-	const result = await fetch('https://{{api_host}}/api/owner', {
+	const result = await fetch(`https://${Placeholder.API_HOST}/api/owner`, {
 		method: 'POST',
 		body: JSON.stringify({ owner: ownerID }),
 		headers: {
@@ -32,7 +32,9 @@ async function onOwnerLoaded(ownerID: string) {
 
 function videosHandler() {
 	const interval = window.setInterval(() => {
-		const gameElement = document.querySelector('a[href="/gaming"]');
+		const gameElement =
+			document.querySelector('ytd-rich-metadata-renderer > a[href="/gaming"]') ??
+			document.querySelector('a#topic-link-container[href="/gaming"]');
 		if (gameElement) {
 			onDetectedGame();
 			window.clearInterval(interval);
