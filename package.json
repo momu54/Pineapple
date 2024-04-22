@@ -1,11 +1,11 @@
 {
 	"name": "pineapple",
-	"version": "1.0.0",
+	"version": "0.0.5",
 	"description": "",
 	"scripts": {
 		"start:edge": "web-ext run -t=chromium --source-dir=dist --chromium-binary=\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\"",
 		"start:chrome": "web-ext run -t=chromium --source-dir=dist --chromium-binary=\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\"",
-		"start:firefox": "web-ext run --firefox=deved",
+		"start:firefox": "web-ext run --firefox=deved --source-dir=dist",
 		"build": "tsc && tsx scripts/build.ts",
 		"build:dev": "tsc && tsx scripts/build.ts dev",
 		"build:xpi": "web-ext build --overwrite-dest --source-dir=dist"
