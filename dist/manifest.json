@@ -3,7 +3,7 @@
 	"manifest_version": 3,
 	"name": "Pineapple",
 	"description": "To decide what to eat",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"host_permissions": ["*://localhost/*", "*://pineapple.seriaati.xyz:9443/*"],
 	"icons": {
 		"64": "icons/icon.png"
