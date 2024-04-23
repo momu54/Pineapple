@@ -44,6 +44,6 @@ It's used to block my classmate who watch Youtube videos at school
             ```
 
         - Chromium
-            - Open youe favorite browser and go to `chrome://extensions/`
+            - Open your favorite browser and go to `chrome://extensions/`
             - Enable `Developer mode`
             - Click `Pack extension` and select dist folder
