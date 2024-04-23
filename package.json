@@ -1,6 +1,6 @@
 {
 	"name": "pineapple",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "",
 	"scripts": {
 		"start:edge": "web-ext run -t=chromium --source-dir=dist --chromium-binary=\"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe\"",
